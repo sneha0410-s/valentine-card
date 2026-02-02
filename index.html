@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💖</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe6f0, #ffb6c1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  overflow: hidden;
+}
+
+/* ENVELOPE */
+.envelope {
+  width: 260px;
+  height: 170px;
+  background: #ff8fab;
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff6f91;
+  clip-path: polygon(0 0, 50% 60%, 100% 0);
+  transform-origin: top;
+  transition: transform 1s;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* CARD */
+.card {
+  position: absolute;
+  width: 230px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  top: 20px;
+  left: 15px;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
+.envelope.open .card {
+  transform: translateY(-180px);
+  opacity: 1;
+}
+
+h2 {
+  color: #e75480;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* BUTTONS */
+.buttons {
+  margin-top: 15px;
+  position: relative;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  background: #ff6f91;
+  color: white;
+  transition: transform 0.3s;
+}
+
+#noBtn {
+  position: absolute;
+}
+
+/* HEART RAIN */
+.heart {
+  position: fixed;
+  top: -10%;
+  font-size: 18px;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openEnvelope()">
+  <div class="flap"></div>
+
+  <div class="card">
+    <h2>Hey You 💖</h2>
+
+    <p>
+      To the man I fall for every single day,  
+      the man who made me believe in love when I didn’t even know I needed to.
+    </p>
+
+    <p>
+      You came into my life quietly, but somehow changed it completely.  
+      With your presence, your words, your care — you turned ordinary moments  
+      into memories I never want to lose.
+    </p>
+
+    <p>
+      You make me feel safe without trying,  
+      seen without asking,  
+      and loved in ways I didn’t know were possible.
+    </p>
+
+    <p>
+      Every day, in big moments and the smallest ones,  
+      my heart keeps choosing you — again and again.
+    </p>
+
+    <p>
+      So this is me, being a little filmy and very honest,  
+      asking you something straight from my heart…
+    </p>
+
+    <strong>
+      Will you be mine — today, tomorrow, and always? 💕
+    </strong>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="yesClick()">YES 💖</button>
+      <button id="noBtn" onmouseover="moveNo()">NO 👀</button>
+    </div>
+  </div>
+</div>
+
+<!-- 🎶 BACKGROUND MUSIC -->
+<audio id="music" loop>
+  <source src="they-call-this-love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let yesSize = 1;
+let musicStarted = false;
+
+function openEnvelope() {
+  document.querySelector(".envelope").classList.add("open");
+
+  if (!musicStarted) {
+    const music = document.getElementById("music");
+    music.volume = 0;
+    music.play();
+    musicStarted = true;
+
+    let vol = 0;
+    const fade = setInterval(() => {
+      if (vol < 0.6) {
+        vol += 0.01;
+        music.volume = vol;
+      } else {
+        clearInterval(fade);
+      }
+    }, 100);
+  }
+}
+
+function yesClick() {
+  yesSize += 0.2;
+  document.getElementById("yesBtn").style.transform = `scale(${yesSize})`;
+  alert("You just made my heart the happiest 💖🥹");
+}
+
+function moveNo() {
+  const btn = document.getElementById("noBtn");
+  btn.style.left = Math.random() * 160 + "px";
+  btn.style.top = Math.random() * 100 + "px";
+}
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
+</script>
+
+</body>
+</html>
