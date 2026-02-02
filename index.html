@@ -46,11 +46,12 @@ body {
 .card {
   position: absolute;
   width: 230px;
+  height: 260px;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 12px;
   text-align: center;
-  top: 20px;
+  top: 15px;
   left: 15px;
   transform: translateY(120px);
   opacity: 0;
@@ -58,22 +59,23 @@ body {
 }
 
 .envelope.open .card {
-  transform: translateY(-180px);
+  transform: translateY(-190px);
   opacity: 1;
 }
 
 h2 {
   color: #e75480;
+  margin-bottom: 8px;
 }
 
 p {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 /* BUTTONS */
 .buttons {
-  margin-top: 15px;
+  margin-top: 10px;
   position: relative;
 }
 
@@ -85,7 +87,6 @@ button {
   cursor: pointer;
   background: #ff6f91;
   color: white;
-  transition: transform 0.3s;
 }
 
 #noBtn {
@@ -118,34 +119,21 @@ button {
     <h2>Hey You 💖</h2>
 
     <p>
-      To the man I fall for every single day,  
-      the man who made me believe in love when I didn’t even know I needed to.
+      To the man I fall for every single day —  
+      the one who made me believe in love without even trying.
     </p>
 
     <p>
-      You came into my life quietly, but somehow changed it completely.  
-      With your presence, your words, your care — you turned ordinary moments  
-      into memories I never want to lose.
+      You turned ordinary moments into something special  
+      and made my heart feel safe, calm, and happy.
     </p>
 
     <p>
-      You make me feel safe without trying,  
-      seen without asking,  
-      and loved in ways I didn’t know were possible.
-    </p>
-
-    <p>
-      Every day, in big moments and the smallest ones,  
-      my heart keeps choosing you — again and again.
-    </p>
-
-    <p>
-      So this is me, being a little filmy and very honest,  
-      asking you something straight from my heart…
+      So here I am, asking you something straight from my heart…
     </p>
 
     <strong>
-      Will you be mine — today, tomorrow, and always? 💕
+      Will you be mine? 💕
     </strong>
 
     <div class="buttons">
@@ -155,46 +143,32 @@ button {
   </div>
 </div>
 
-<!-- 🎶 BACKGROUND MUSIC -->
+<!-- MUSIC -->
 <audio id="music" loop>
   <source src="they-call-this-love.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 let yesSize = 1;
-let musicStarted = false;
 
 function openEnvelope() {
   document.querySelector(".envelope").classList.add("open");
 
-  if (!musicStarted) {
-    const music = document.getElementById("music");
-    music.volume = 0;
-    music.play();
-    musicStarted = true;
-
-    let vol = 0;
-    const fade = setInterval(() => {
-      if (vol < 0.6) {
-        vol += 0.01;
-        music.volume = vol;
-      } else {
-        clearInterval(fade);
-      }
-    }, 100);
-  }
+  const music = document.getElementById("music");
+  music.volume = 0.6;
+  music.play().catch(() => {});
 }
 
 function yesClick() {
   yesSize += 0.2;
   document.getElementById("yesBtn").style.transform = `scale(${yesSize})`;
-  alert("You just made my heart the happiest 💖🥹");
+  alert("You just made my heart really really happy 💖🥹");
 }
 
 function moveNo() {
   const btn = document.getElementById("noBtn");
-  btn.style.left = Math.random() * 160 + "px";
-  btn.style.top = Math.random() * 100 + "px";
+  btn.style.left = Math.random() * 140 + "px";
+  btn.style.top = Math.random() * 80 + "px";
 }
 
 setInterval(() => {
@@ -204,8 +178,11 @@ setInterval(() => {
   heart.style.left = Math.random() * 100 + "vw";
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 5000);
-}, 300);
+}, 350);
 </script>
 
 </body>
 </html>
+
+    
+  
