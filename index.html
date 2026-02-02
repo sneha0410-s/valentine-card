@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Sarthak 💖</title>
+<title>For You 💖</title>
 
 <style>
 body {
@@ -55,7 +55,7 @@ body {
   left: 15px;
   transform: translateY(120px);
   opacity: 0;
-  transition: transform 1s, opacity 1s;
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .envelope.open .card {
@@ -65,18 +65,20 @@ body {
 
 h2 {
   color: #e75480;
-  margin-bottom: 8px;
+  margin: 6px 0;
 }
 
 p {
   font-size: 14px;
   line-height: 1.4;
+  margin: 6px 0;
 }
 
 /* BUTTONS */
 .buttons {
   margin-top: 10px;
   position: relative;
+  height: 40px;
 }
 
 button {
@@ -93,12 +95,12 @@ button {
   position: absolute;
 }
 
-/* HEART RAIN */
-.heart {
+/* HEART + ROSE PETALS */
+.fall {
   position: fixed;
   top: -10%;
-  font-size: 18px;
-  animation: fall 5s linear infinite;
+  font-size: 20px;
+  animation: fall 6s linear infinite;
 }
 
 @keyframes fall {
@@ -107,40 +109,74 @@ button {
     opacity: 0;
   }
 }
+
+/* FINAL PAGE */
+.final {
+  display: none;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+
+.final h1 {
+  color: #e75480;
+  margin-bottom: 10px;
+}
+
+.final p {
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+/* RING SPARKLE */
+.ring {
+  font-size: 60px;
+  animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+  from { transform: scale(1); filter: drop-shadow(0 0 5px gold); }
+  to { transform: scale(1.1); filter: drop-shadow(0 0 15px gold); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
 </style>
 </head>
 
 <body>
 
-<div class="envelope" onclick="openEnvelope()">
+<div class="envelope" id="envelope" onclick="openEnvelope()">
   <div class="flap"></div>
 
   <div class="card">
-    <h2>Hey Sarthak 💖</h2>
+    <h2>Hey S💖</h2>
 
     <p>
-      To the man I fall for every single day and can never get over —  
+      To the man I fall for every single day —
       the one who made me believe in love.
     </p>
 
     <p>
-      You turned every moment into something special  
-      and with you I am the happiesttttt.
+      You make my heart feel owned and make me the happiessttt.
     </p>
 
-    <p>
-      So here I am, asking you something straight from my heart…
-    </p>
-
-    <strong>
-      Will you be mine for always? 💕
-    </strong>
+    <strong>Will you be mine forever? 💕</strong>
 
     <div class="buttons">
-      <button id="yesBtn" onclick="yesClick()">YES 💖</button>
+      <button onclick="yesClick()">YES 💖</button>
       <button id="noBtn" onmouseover="moveNo()">NO 👀</button>
     </div>
   </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="final" id="finalPage">
+  <div class="ring">💍</div>
+  <h1>Thank You for Being Mine 💖</h1>
+  <p>🌹 A heart full of love, just for you 🌹</p>
+  <p>I choose you — always.</p>
 </div>
 
 <!-- MUSIC -->
@@ -149,40 +185,35 @@ button {
 </audio>
 
 <script>
-let yesSize = 1;
-
 function openEnvelope() {
   document.querySelector(".envelope").classList.add("open");
-
   const music = document.getElementById("music");
   music.volume = 0.6;
   music.play().catch(() => {});
 }
 
 function yesClick() {
-  yesSize += 0.2;
-  document.getElementById("yesBtn").style.transform = `scale(${yesSize})`;
-  alert("You just made my heart really really happy 💖🥹");
+  document.getElementById("envelope").style.display = "none";
+  document.getElementById("finalPage").style.display = "block";
 }
 
 function moveNo() {
   const btn = document.getElementById("noBtn");
   btn.style.left = Math.random() * 140 + "px";
-  btn.style.top = Math.random() * 80 + "px";
+  btn.style.top = Math.random() * 20 + "px";
 }
 
+/* Hearts + Roses */
 setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 5000);
-}, 350);
+  const el = document.createElement("div");
+  el.className = "fall";
+  el.innerHTML = Math.random() > 0.5 ? "💖" : "🌹";
+  el.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 6000);
+}, 400);
 </script>
 
 </body>
 </html>
 
-    
-  
