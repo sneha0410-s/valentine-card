@@ -1,217 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For You 💖</title>
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ffe6f0, #ffb6c1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Georgia', serif;
-  overflow: hidden;
-}
+  <!-- Mobile view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* ENVELOPE */
-.envelope {
-  width: 260px;
-  height: 170px;
-  background: #ff8fab;
-  position: relative;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
+  <style>
+    body {
+      margin: 0;
+      background: #ffe6f0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
 
-.flap {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: #ff6f91;
-  clip-path: polygon(0 0, 50% 60%, 100% 0);
-  transform-origin: top;
-  transition: transform 1s;
-}
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 30px 15px;
+    }
 
-.envelope.open .flap {
-  transform: rotateX(180deg);
-}
+    h1, h2 {
+      color: #d6336c;
+    }
 
-/* CARD */
-.card {
-  position: absolute;
-  width: 230px;
-  height: 260px;
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  top: 15px;
-  left: 15px;
-  transform: translateY(120px);
-  opacity: 0;
-  transition: transform 1s ease, opacity 1s ease;
-}
+    img {
+      width: 80%;
+      max-width: 260px;
+      margin: 15px 0;
+    }
 
-.envelope.open .card {
-  transform: translateY(-190px);
-  opacity: 1;
-}
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin: 10px;
+      border-radius: 25px;
+      border: none;
+      background-color: #ff8fab;
+      color: white;
+      cursor: pointer;
+    }
 
-h2 {
-  color: #e75480;
-  margin: 6px 0;
-}
+    .page { display: none; }
+    .active { display: block; }
 
-p {
-  font-size: 14px;
-  line-height: 1.4;
-  margin: 6px 0;
-}
+    /* 🌹💍 raining emojis */
+    .rain {
+      position: fixed;
+      top: -10%;
+      z-index: 1;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
 
-/* BUTTONS */
-.buttons {
-  margin-top: 10px;
-  position: relative;
-  height: 40px;
-}
-
-button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-  background: #ff6f91;
-  color: white;
-}
-
-#noBtn {
-  position: absolute;
-}
-
-/* HEART + ROSE PETALS */
-.fall {
-  position: fixed;
-  top: -10%;
-  font-size: 20px;
-  animation: fall 6s linear infinite;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
-}
-
-/* FINAL PAGE */
-.final {
-  display: none;
-  text-align: center;
-  animation: fadeIn 1.5s ease;
-}
-
-.final h1 {
-  color: #e75480;
-  margin-bottom: 10px;
-}
-
-.final p {
-  font-size: 16px;
-  margin: 6px 0;
-}
-
-/* RING SPARKLE */
-.ring {
-  font-size: 60px;
-  animation: sparkle 1.5s infinite alternate;
-}
-
-@keyframes sparkle {
-  from { transform: scale(1); filter: drop-shadow(0 0 5px gold); }
-  to { transform: scale(1.1); filter: drop-shadow(0 0 15px gold); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-</style>
+    @keyframes fall {
+      0% { transform: translateY(-10vh); }
+      100% { transform: translateY(110vh); }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="envelope" id="envelope" onclick="openEnvelope()">
-  <div class="flap"></div>
+<!-- 🌹💍 BACKGROUND RAIN -->
+<script>
+  const emojis = ["🌹", "💍"];
+  for (let i = 0; i < 25; i++) {
+    let drop = document.createElement("div");
+    drop.className = "rain";
+    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    drop.style.left = Math.random() * 100 + "vw";
+    drop.style.animationDuration = (4 + Math.random() * 6) + "s";
+    drop.style.fontSize = (20 + Math.random() * 20) + "px";
+    document.body.appendChild(drop);
+  }
+</script>
 
-  <div class="card">
-    <h2>Hey S💖</h2>
+<div class="container">
 
-    <p>
-      To the man I fall for every single day —
-      the one who made me believe in love.
-    </p>
+  <!-- PAGE 1 -->
+  <div id="p1" class="page active">
+    <h1>Hey You 💕</h1>
 
-    <p>
-      You make my heart feel owned and make me the happiessttt.
-    </p>
+    <!-- GIF 1 -->
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnMyZnE5YTFicDcwOGJ1NTNqaTk4ZnB0azJ5bXR2Y2owNnd3YjYzMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qJKG2VemiNjO7Fv4Ct/giphy.gif">
 
-    <strong>Will you be mine forever? 💕</strong>
-
-    <div class="buttons">
-      <button onclick="yesClick()">YES 💖</button>
-      <button id="noBtn" onmouseover="moveNo()">NO 👀</button>
-    </div>
+    <h2>Will you be my Valentine? 🥺</h2>
+    <button onclick="go(2)">YES 💖</button>
+    <button onclick="nope()">NO 😢</button>
+    <p id="noText"></p>
   </div>
+
+  <!-- PAGE 2 -->
+  <div id="p2" class="page">
+
+    <!-- GIF 2 -->
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjU0OWg3M3NldWE2bnRldW43enpyYjkwZmVtcGZ1bmpqNXB2ZzN0ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KxWDsHfQH6S8AnkZGo/giphy.gif">
+
+    <h2>You sure, baby? 🥹💗</h2>
+    <button onclick="go(3)">YES 😳</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div id="p3" class="page">
+
+    <!-- GIF 3 -->
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Z6aWpqaDZsZWFhZG1mazJsaWk3YWdxMDJnZzAydDJoZWQ5dGFrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KHUmzbfKnguuFsHhm9/giphy.gif">
+
+    <h2>Pakka wala yes? 🤭</h2>
+    <button onclick="go(4)">100% YES 💞</button>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div id="p4" class="page">
+
+    <!-- GIF 4 -->
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHZyYzhzNmhiOXh3NzEwdHFpNHF6MGxkdjRwZzM2aDQwNjM1aWZlYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/45yCkWIIjVnwDbsOBa/giphy.gif">
+
+    <h2>
+      Your name, Sarthak Akhilesh, is quite long…<br><br>
+      can I just call you <b>mine</b>? 💍🤍
+    </h2>
+  </div>
+
 </div>
 
-<!-- FINAL PAGE -->
-<div class="final" id="finalPage">
-  <div class="ring">💍</div>
-  <h1>Thank You for Being Mine 💖</h1>
-  <p>🌹 A heart full of love, just for you 🌹</p>
-  <p>I choose you — always.</p>
-</div>
-
-<!-- MUSIC -->
+<!-- 🎵 MUSIC (local file) -->
 <audio id="music" loop>
-  <source src="they-call-this-love.mp3" type="audio/mpeg">
+  <source src="love.mp3">
 </audio>
 
+<button
+  style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);"
+  onclick="document.getElementById('music').play()">
+  ▶ Play Music
+</button>
+
 <script>
-function openEnvelope() {
-  document.querySelector(".envelope").classList.add("open");
-  const music = document.getElementById("music");
-  music.volume = 0.6;
-  music.play().catch(() => {});
-}
+  function go(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('p' + n).classList.add('active');
+  }
 
-function yesClick() {
-  document.getElementById("envelope").style.display = "none";
-  document.getElementById("finalPage").style.display = "block";
-}
-
-function moveNo() {
-  const btn = document.getElementById("noBtn");
-  btn.style.left = Math.random() * 140 + "px";
-  btn.style.top = Math.random() * 20 + "px";
-}
-
-/* Hearts + Roses */
-setInterval(() => {
-  const el = document.createElement("div");
-  el.className = "fall";
-  el.innerHTML = Math.random() > 0.5 ? "💖" : "🌹";
-  el.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 6000);
-}, 400);
+  function nope() {
+    document.getElementById("noText").innerText =
+      "Please think again 🥹💔";
+  }
 </script>
 
 </body>
