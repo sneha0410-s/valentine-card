@@ -1,155 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For You ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💖</title>
 
-  <!-- Mobile view -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
 
-  <style>
-    body {
-      margin: 0;
-      background: #ffe6f0;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
+body{
+  height:100vh;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  overflow:hidden;
+}
 
-    .container {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 30px 15px;
-    }
+/* ROSE + RING RAIN */
+.rain::before{
+  content:"🌹 💍 🌹 💍 🌹 💍 🌹 💍";
+  position:absolute;
+  width:100%;
+  height:200%;
+  top:-100%;
+  font-size:26px;
+  opacity:0.6;
+  animation: rain 8s linear infinite;
+}
 
-    h1, h2 {
-      color: #d6336c;
-    }
+@keyframes rain{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(100%); }
+}
 
-    img {
-      width: 80%;
-      max-width: 260px;
-      margin: 15px 0;
-    }
+.container{
+  width:100%;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+}
 
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-      margin: 10px;
-      border-radius: 25px;
-      border: none;
-      background-color: #ff8fab;
-      color: white;
-      cursor: pointer;
-    }
+.page{
+  display:none;
+  background:rgba(255,255,255,0.95);
+  width:90%;
+  max-width:360px;
+  padding:20px;
+  text-align:center;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
 
-    .page { display: none; }
-    .active { display: block; }
+.page.active{
+  display:block;
+}
 
-    /* 🌹💍 raining emojis */
-    .rain {
-      position: fixed;
-      top: -10%;
-      z-index: 1;
-      animation: fall linear infinite;
-      opacity: 0.8;
-    }
+.gif{
+  width:100%;
+  max-height:200px;
+  object-fit:contain;
+  margin-bottom:10px;
+}
 
-    @keyframes fall {
-      0% { transform: translateY(-10vh); }
-      100% { transform: translateY(110vh); }
-    }
-  </style>
+h1{
+  color:#e60073;
+  margin:10px 0;
+}
+
+h2{
+  margin:10px 0;
+}
+
+p{
+  margin-bottom:15px;
+}
+
+button{
+  padding:10px 22px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d6d;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.no{
+  background:#aaa;
+}
+
+.buttons{
+  display:flex;
+  gap:15px;
+  justify-content:center;
+}
+</style>
 </head>
 
 <body>
 
-<!-- 🌹💍 BACKGROUND RAIN -->
-<script>
-  const emojis = ["🌹", "💍"];
-  for (let i = 0; i < 25; i++) {
-    let drop = document.createElement("div");
-    drop.className = "rain";
-    drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-    drop.style.left = Math.random() * 100 + "vw";
-    drop.style.animationDuration = (4 + Math.random() * 6) + "s";
-    drop.style.fontSize = (20 + Math.random() * 20) + "px";
-    document.body.appendChild(drop);
-  }
-</script>
+<div class="rain"></div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" src="music.mp3" loop></audio>
 
 <div class="container">
 
   <!-- PAGE 1 -->
-  <div id="p1" class="page active">
-    <h1>Hey You my Love 💕</h1>
-
-    <!-- GIF 1 -->
-    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnMyZnE5YTFicDcwOGJ1NTNqaTk4ZnB0azJ5bXR2Y2owNnd3YjYzMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qJKG2VemiNjO7Fv4Ct/giphy.gif">
-
-    <h2>Will you be my Valentine? 🥺</h2>
-    <button onclick="go(2)">YES 💖</button>
-    <button onclick="nope()">NO 😢</button>
-    <p id="noText"></p>
+  <div class="page active">
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnMyZnE5YTFicDcwOGJ1NTNqaTk4ZnB0azJ5bXR2Y2owNnd3YjYzMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qJKG2VemiNjO7Fv4Ct/giphy.gif" class="gif">
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div class="buttons">
+      <button onclick="yesClicked()">YES 💖</button>
+      <button class="no">NO 🙄</button>
+    </div>
   </div>
 
   <!-- PAGE 2 -->
-  <div id="p2" class="page">
-
-    <!-- GIF 2 -->
-    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjU0OWg3M3NldWE2bnRldW43enpyYjkwZmVtcGZ1bmpqNXB2ZzN0ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KxWDsHfQH6S8AnkZGo/giphy.gif">
-
-    <h2>You sure, baby? 🥹💗</h2>
-    <button onclick="go(3)">YES 😳</button>
+  <div class="page">
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmhrbnI0MmRlY2EwcjF2eWsyMjRweHhhZWt3ZmVsajNvY3FmY2dxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KHUmzbfKnguuFsHhm9/giphy.gif" class="gif">
+    <h2>Wait wait…</h2>
+    <p>Are you REALLY sure? 🥺</p>
+    <button onclick="nextPage()">Yes baby 💕</button>
   </div>
 
   <!-- PAGE 3 -->
-  <div id="p3" class="page">
-
-    <!-- GIF 3 -->
-    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Z6aWpqaDZsZWFhZG1mazJsaWk3YWdxMDJnZzAydDJoZWQ5dGFrcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KHUmzbfKnguuFsHhm9/giphy.gif">
-
-    <h2>Pakka wala yes? 🤭</h2>
-    <button onclick="go(4)">100% YES 💞</button>
+  <div class="page">
+    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2R2NmRrMjJlaGNjcHJpd2VzZ3p4YjZyazlyOG1mcmpkYXJmMjAyciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/O5agOF0eOR4UlpGxg0/giphy.gif" class="gif">
+    <h2>Okay but listen… 👀</h2>
+    <p>I have something to ask</p>
+    <button onclick="nextPage()">Tell me 💗</button>
   </div>
 
   <!-- PAGE 4 -->
-  <div id="p4" class="page">
+  <div class="page">
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExODZxODd4OXM2cjRnZzk2cXVzY2hqcGY0OXNvOGFqZGR2YjJiYjZ6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IbfNMwhZKr7lC/giphy.gif" class="gif">
+    <h2>Sarthak Akhilesh is quite long 😅</h2>
+    <button onclick="nextPage()">True 🤭</button>
+  </div>
 
-    <!-- GIF 4 -->
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHZyYzhzNmhiOXh3NzEwdHFpNHF6MGxkdjRwZzM2aDQwNjM1aWZlYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/45yCkWIIjVnwDbsOBa/giphy.gif">
+  <!-- PAGE 5 -->
+  <div class="page">
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGhlbjFqcXJqeXE0ZXgxc3pzdnV0bDhjd3U5cmFqNW1hbnptOWdzbCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/d37mEpcaGP3pudPoho/giphy.gif" class="gif">
+    <p>Can I call you</p>
+    <h1>“Mine” ? 💍</h1>
+    <button onclick="nextPage()">Always 🥹</button>
+  </div>
 
-    <h2>
-      Your name, Sarthak Akhilesh, is quite long…<br><br>
-      can I just call you <b>mine</b>? 💍🤍
-    </h2>
+  <!-- PAGE 6 -->
+  <div class="page">
+    <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2FmM2llZDd3N2k3bTZnZHo5b3lsdG0yc2hiYTE4N2U2dnRydjEyMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Tga4sDdqQGONpPeNsS/giphy.gif" class="gif">
+    <h2>Pinky promise? 🤞</h2>
+    <button onclick="nextPage()">Promise 💖</button>
+  </div>
+
+  <!-- PAGE 7 -->
+  <div class="page">
+    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHZ0bHp5azc5NzRoZ2JhNDF2dmtlenI2bHI2b2k2cjR3ZnExN2M5NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IzXiddo2twMmdmU8Lv/giphy.gif" class="gif">
+    <h1>Thank you for being mine 🌹</h1>
+    <p>Forever starts here ✨</p>
   </div>
 
 </div>
 
-<!-- 🎵 MUSIC (local file) -->
-<audio id="music" loop>
-  <source src="they-call-this-love.mp3">
-</audio>
-
-<button
-  style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);"
-  onclick="document.getElementById('music').play()">
-  ▶ Play Music
-</button>
-
 <script>
-  function go(n) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('p' + n).classList.add('active');
-  }
+let pages = document.querySelectorAll(".page");
+let current = 0;
 
-  function nope() {
-    document.getElementById("noText").innerText =
-      "Please think again 🥹💔";
-  }
+function nextPage(){
+  pages[current].classList.remove("active");
+  current++;
+  pages[current].classList.add("active");
+}
+
+function yesClicked(){
+  document.getElementById("bgMusic").play();
+  nextPage();
+}
 </script>
 
 </body>
 </html>
-
